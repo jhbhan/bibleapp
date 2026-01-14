@@ -1,15 +1,24 @@
 import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
 import App from '../app';
 import MainMenu from '../components/MainMenu';
 import { BibleData } from '../types';
+import versesReducer from '../store/versesSlice';
 
 const bibleData: BibleData = {
     "Genesis": {
         "1": { "1": "In the beginning..." }
     }
 };
+
+const createMockStore = () => configureStore({
+    reducer: {
+        verses: versesReducer,
+    },
+});
 
 describe('App Component', () => {
     beforeEach(() => {
@@ -19,7 +28,12 @@ describe('App Component', () => {
     });
 
     it('renders MainMenu by default', async () => {
-        render(<App />);
+        const store = createMockStore();
+        render(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        );
         await waitFor(() => {
             expect(screen.getByText('ActsType')).toBeInTheDocument();
             expect(screen.getByText('Practice Verses')).toBeInTheDocument();
@@ -27,7 +41,12 @@ describe('App Component', () => {
     });
 
     it('navigates to different views', async () => {
-        render(<App />);
+        const store = createMockStore();
+        render(
+            <Provider store={store}>
+                <App />
+            </Provider>
+        );
         await waitFor(() => {
             fireEvent.click(screen.getByText('Add/Edit Verses'));
             expect(screen.getByText('Add/Edit Verses')).toBeInTheDocument();

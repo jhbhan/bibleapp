@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import MainMenu from './components/MainMenu';
 import AddVerse from './components/AddVerse';
 import EditCollections from './components/EditCollections';
@@ -16,7 +17,16 @@ import {
     AnimationClass,
     LetterStatus,
     Word,
-} from '../types';
+} from './types';
+import {
+    addSavedVerse,
+    createCollection,
+    deleteCollection,
+    addVerseToCollection,
+    removeVerseFromCollection,
+    deleteSavedVerse,
+} from './store/versesSlice';
+import { RootState, AppDispatch } from './store';
 
 declare global {
     interface Window {
@@ -28,28 +38,23 @@ declare global {
 }
 
 export default function App() {
+    const dispatch: AppDispatch = useDispatch();
+    const { savedVerses, collections } = useSelector((state: RootState) => state.verses);
+
     const [view, setView] = useState<View>('menu');
     const [mode, setMode] = useState<Mode>('practice');
     const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
-    const [savedVerses, setSavedVerses] = useState<SavedVerse[]>(() => {
-        const saved = localStorage.getItem('savedVerses');
-        return saved ? JSON.parse(saved) : [];
-    });
-    const [collections, setCollections] = useState<Collections>(() => {
-        const saved = localStorage.getItem('collections');
-        return saved ? JSON.parse(saved) : { "All Verses": [] };
-    });
     const [editingCollection, setEditingCollection] = useState<string | null>(null);
     const [selectedPracticeCollection, setSelectedPracticeCollection] = useState<string | null>(null);
-    const [typingMode, setTypingMode] = useState<TypingMode>('firstLetter'); // 'firstLetter' or 'allLetters'
+    const [typingMode, setTypingMode] = useState<TypingMode>('firstLetter');
 
-    const [animationClass, setAnimationClass] = useState<AnimationClass>('fadeIn'); // Initial animation class
+    const [animationClass, setAnimationClass] = useState<AnimationClass>('fadeIn');
     const handleSetView = (newView: View) => {
-        setAnimationClass('fadeOut animated-fast'); // Start fade out
+        setAnimationClass('fadeOut animated-fast');
         setTimeout(() => {
             setView(newView);
-            setAnimationClass('fadeIn animated-fast'); // Start fade in for new view
-        }, 150); // Corresponds to animated-fast
+            setAnimationClass('fadeIn animated-fast');
+        }, 150);
     };
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -70,20 +75,11 @@ export default function App() {
                     .then(data => setBibleData(data));
             });
         } else {
-            fetch('esv.json')
+            fetch('/esv.json')
                 .then(response => response.json())
                 .then(data => setBibleData(data));
         }
     }, []);
-
-    useEffect(() => {
-        localStorage.setItem('savedVerses', JSON.stringify(savedVerses));
-        setCollections(prev => ({ ...prev, "All Verses": savedVerses.map(v => v.range) }));
-    }, [savedVerses]);
-
-    useEffect(() => {
-        localStorage.setItem('collections', JSON.stringify(collections));
-    }, [collections]);
 
     const sessionWords: Word[] = useMemo(() => {
         if (!bibleData || (!selectedChapter && !editingCollection)) return [];
@@ -174,7 +170,6 @@ export default function App() {
         setAnimationClass('fadeOut animated-fast');
         setTimeout(() => {
             setSelectedChapter(chapter);
-            // setEditingCollection(null); // Keep the editing collection
             setCurrentIndex(0);
             setCurrentWordIndex(0);
             setAttempts({ correct: 0, total: 0 });
@@ -339,7 +334,7 @@ export default function App() {
             }
 
             let text = '';
-            if(!bibleData) return;
+            if(!bibleData) return 'invalid';
             const chapters = Object.keys(bibleData[selectedBook]);
             const startChapIndex = chapters.indexOf(startChapter);
             const endChapIndex = chapters.indexOf(endChap);
@@ -365,7 +360,7 @@ export default function App() {
                 text: text.trim()
             };
 
-            setSavedVerses(prev => [...prev, newVerse]);
+            dispatch(addSavedVerse(newVerse));
             if (!silent) alert('Verse range added!');
             return 'added';
         }
@@ -374,7 +369,7 @@ export default function App() {
 
     const handleCreateCollection = (newCollectionName: string) => {
         if (newCollectionName && !collections[newCollectionName]) {
-            setCollections(prev => ({ ...prev, [newCollectionName]: [] }));
+            dispatch(createCollection(newCollectionName));
         } else if (collections[newCollectionName]) {
             alert('A collection with this name already exists.');
         }
@@ -382,36 +377,24 @@ export default function App() {
 
     const handleDeleteCollection = (name: string) => {
         if (name !== "All Verses") {
-            const newCollections = { ...collections };
-            delete newCollections[name];
-            setCollections(newCollections);
+            dispatch(deleteCollection(name));
         } else {
             alert('Cannot delete the "All Verses" collection.');
         }
     };
 
     const handleAddVerseToCollection = (collectionName: string, verseId: string) => {
-        if (collectionName && !collections[collectionName].includes(verseId)) {
-            const newCollections = { ...collections };
-            newCollections[collectionName].push(verseId);
-            setCollections(newCollections);
-        }
+        dispatch(addVerseToCollection({ collectionName, verseId }));
     };
 
     const handleRemoveVerseFromCollection = (collectionName: string, verseId: string) => {
-        if (collectionName) {
-            const newCollections = { ...collections };
-            newCollections[collectionName] = newCollections[collectionName].filter(id => id !== verseId);
-            setCollections(newCollections);
-        }
+        dispatch(removeVerseFromCollection({ collectionName, verseId }));
     };
 
     const handleDeleteVerse = (verseRange: string) => {
-        setSavedVerses(prev => prev.filter(v => v.range !== verseRange));
+        dispatch(deleteSavedVerse(verseRange));
     };
 
-    // ... (handleAddVerse and other handlers remain the same)
-    
     const renderView = () => {
         if (!bibleData) {
             return <div>Loading...</div>;
