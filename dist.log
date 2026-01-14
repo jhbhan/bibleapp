@@ -1,0 +1,32 @@
+
+> actstype@0.0.0 dist
+> npm run build && electron-builder
+
+
+> actstype@0.0.0 build
+> vite build
+
+vite v4.5.14 building for production...
+transforming...
+✓ 38 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.48 kB │ gzip:  0.32 kB
+dist/assets/index-86ecaaf7.css    0.46 kB │ gzip:  0.28 kB
+dist/assets/index-f1cd35a5.js   161.48 kB │ gzip: 50.56 kB
+✓ built in 478ms
+  • electron-builder  version=26.4.0 os=25.2.0
+  • loaded configuration  file=package.json ("build" field)
+  • description is missed in the package.json  appPackageFile=/Users/junminkim/Desktop/Programming/ActsType/package.json
+  • author is missed in the package.json  appPackageFile=/Users/junminkim/Desktop/Programming/ActsType/package.json
+  • executing @electron/rebuild  electronVersion=39.2.7 arch=arm64 buildFromSource=false workspaceRoot=/Users/junminkim/Desktop/Programming/ActsType projectDir=./ appDir=./
+  • installing native dependencies  arch=arm64
+  • completed installing native dependencies
+  • packaging       platform=darwin arch=arm64 electron=39.2.7 appOutDir=release/mac-arm64
+  • default Electron icon is used  reason=application icon is not set
+  • signing         file=release/mac-arm64/ActsType.app platform=darwin type=distribution identityName=Apple Development: junminjosh.kim@gmail.com (674CF86B92) identityHash=F0B347BD1658DF3A1AB6DDD439106A4F0AF185BB provisioningProfile=none
+  • skipped macOS notarization  reason=`notarize` options were unable to be generated
+  • building        target=macOS zip arch=arm64 file=release/ActsType-0.0.0-arm64-mac.zip
+  • building        target=DMG arch=arm64 file=release/ActsType-0.0.0-arm64.dmg
+  • building block map  blockMapFile=release/ActsType-0.0.0-arm64.dmg.blockmap
+  • building block map  blockMapFile=release/ActsType-0.0.0-arm64-mac.zip.blockmap

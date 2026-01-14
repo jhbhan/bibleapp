@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+/* Prevent layout shift during auto-scroll */
+.cursor-marker {
+    scroll-margin-top: 45vh;
+        scroll-margin-bottom: 45vh;
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes fadeOut {
+        from { opacity: 1; }
+        to { opacity: 0; }
+    }
+    
+    .animated {
+        animation-duration: 300ms;
+        animation-fill-mode: both;
+    }
+    
+    .animated-fast {
+        animation-duration: 150ms;
+    }
+    
+    .fadeIn {
+        animation-name: fadeIn;
+    }
+    
+    .fadeOut {
+    
+            animation-name: fadeOut;
+    
+        }
+    
+    
+    
+    @keyframes shake {
+    
+        0%, 100% { transform: translateX(0); }
+    
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    
+    }
+    
+    
+    
+    @keyframes blink-red {
+    
+        0%, 100% { background-color: transparent; }
+    
+        50% { background-color: rgba(255, 0, 0, 0.1); }
+    
+    }
+    
+    
+    
+    .shake {
+    
+        animation-name: shake;
+    
+        animation-duration: 300ms;
+    
+    }
+    
+    
+    
+    .blink-red {
+    
+        animation-name: blink-red;
+    
+        animation-duration: 300ms;
+    
+    }
+    
+    
