@@ -26,7 +26,7 @@ export default function PracticeMenu({ collections, startSession, startCollectio
                 <div className="flex flex-col gap-3 w-full max-w-xs">
                     <button onClick={() => startCollectionSession(selectedPracticeCollection)}
                             disabled={versesInCollection.length === 0}
-                            className="px-6 py-4 bg-black text-white border border-black rounded hover:bg-zinc-800 transition-all text-center font-bold uppercase tracking-widest text-xs disabled:bg-gray-300">
+                            className="btn btn-primary disabled:bg-gray-300">
                         Practice All Verses
                     </button>
                     <div className="h-px bg-gray-200 my-2" />
@@ -43,7 +43,7 @@ export default function PracticeMenu({ collections, startSession, startCollectio
                         <p className="text-center text-gray-500">No verses in this collection.</p>
                     )}
                     <button onClick={() => setSelectedPracticeCollection(null)}
-                        className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs mt-6">
+                        className="btn btn-secondary mt-6">
                         Back to Collections
                     </button>
                 </div>
@@ -64,7 +64,7 @@ export default function PracticeMenu({ collections, startSession, startCollectio
                     </button>
                 ))}
                 <button onClick={() => setView('menu')}
-                    className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs mt-6">
+                    className="btn btn-secondary mt-6">
                     Back to Main Menu
                 </button>
             </div>

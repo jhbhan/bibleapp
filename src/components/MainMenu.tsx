@@ -11,15 +11,15 @@ export default function MainMenu({ setView }: MainMenuProps) {
             <h1 className="text-4xl font-black mb-10 tracking-tighter text-center">ActsType</h1>
             <div className="flex flex-col gap-3 w-full max-w-xs">
                 <button onClick={() => setView('practice-menu')}
-                    className="px-6 py-4 bg-black text-white border border-black rounded hover:bg-zinc-800 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-primary">
                     Practice Verses
                 </button>
                 <button onClick={() => setView('add-verse')}
-                    className="px-6 py-4 bg-black text-white border border-black rounded hover:bg-zinc-800 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-primary">
                     Add/Edit Verses
                 </button>
                 <button onClick={() => setView('edit-collections')}
-                    className="px-6 py-4 bg-black text-white border border-black rounded hover:bg-zinc-800 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-primary">
                     Create/Edit Collections
                 </button>
             </div>

@@ -20,9 +20,13 @@ const versesSlice = createSlice({
         },
         addSavedVerse: (state, action: PayloadAction<SavedVerse>) => {
             state.savedVerses.push(action.payload);
+            state.collections["All Verses"].push(action.payload.range);
         },
         deleteSavedVerse: (state, action: PayloadAction<string>) => {
             state.savedVerses = state.savedVerses.filter(verse => verse.range !== action.payload);
+            Object.keys(state.collections).forEach(collectionName => {
+                state.collections[collectionName] = state.collections[collectionName].filter(verseId => verseId !== action.payload);
+            });
         },
         setCollections: (state, action: PayloadAction<Collections>) => {
             state.collections = action.payload;

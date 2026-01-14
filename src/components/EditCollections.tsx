@@ -32,7 +32,7 @@ export default function EditCollections({ collections, savedVerses, handleCreate
                     {verseIdsInCollection.map(verseId => (
                         <div key={verseId} className="flex justify-between items-center p-2 border-b">
                             <span>{verseId}</span>
-                            <button onClick={() => handleRemoveVerseFromCollection(editingCollection, verseId)} className="text-red-500 hover:text-red-700">Remove</button>
+                            <button onClick={() => handleRemoveVerseFromCollection(editingCollection, verseId)} className="btn btn-danger">Remove</button>
                         </div>
                     ))}
 
@@ -40,12 +40,12 @@ export default function EditCollections({ collections, savedVerses, handleCreate
                     {versesNotInCollection.map(v => (
                          <div key={v.range} className="flex justify-between items-center p-2 border-b">
                             <span>{v.range}</span>
-                            <button onClick={() => handleAddVerseToCollection(editingCollection, v.range)} className="text-blue-500 hover:text-blue-700">Add</button>
+                            <button onClick={() => handleAddVerseToCollection(editingCollection, v.range)} className="btn btn-primary">Add</button>
                         </div>
                     ))}
                 </div>
                 <button onClick={() => setEditingCollection(null)}
-                    className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs mt-6">
+                    className="btn btn-secondary mt-6">
                     Back to Collections
                 </button>
             </div>
@@ -64,7 +64,7 @@ export default function EditCollections({ collections, savedVerses, handleCreate
                         placeholder="New collection name"
                         className="px-4 py-3 border border-gray-300 rounded w-full"
                     />
-                    <button onClick={onCreateCollection} className="px-6 py-3 bg-black text-white rounded">Create</button>
+                    <button onClick={onCreateCollection} className="btn btn-primary px-6 py-3">Create</button>
                 </div>
 
                 <div className="flex flex-col gap-3">
@@ -86,7 +86,7 @@ export default function EditCollections({ collections, savedVerses, handleCreate
                 </div>
 
                 <button onClick={() => setView('menu')}
-                    className="w-full px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs mt-6">
+                    className="btn btn-secondary w-full mt-6">
                     Back to Main Menu
                 </button>
             </div>

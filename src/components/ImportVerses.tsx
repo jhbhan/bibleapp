@@ -133,7 +133,7 @@ export default function ImportVerses({ handleAddVerse, setView, bibleData }: Imp
                 </div>
 
                 <div className="flex flex-col items-center justify-center">
-                    <label htmlFor="csv-upload" className="cursor-pointer px-6 py-2 bg-violet-50 text-violet-700 rounded-full font-semibold hover:bg-violet-100">
+                    <label htmlFor="csv-upload" className="btn btn-primary cursor-pointer">
                         Choose File
                     </label>
                     <input id="csv-upload" type="file" accept=".csv" onChange={handleFileUpload} data-testid="csv-upload" className="hidden"/>
@@ -164,7 +164,7 @@ export default function ImportVerses({ handleAddVerse, setView, bibleData }: Imp
                     </div>
                 )}
                 
-                <button onClick={() => setView('add-verse')} className="mt-8 px-6 py-4 bg-gray-200 text-black rounded hover:bg-gray-300 transition-all font-bold uppercase tracking-widest text-xs">
+                <button onClick={() => setView('add-verse')} className="btn btn-secondary mt-8">
                     Back
                 </button>
             </div>

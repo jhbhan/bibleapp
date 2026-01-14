@@ -51,13 +51,13 @@ export default function PracticeView({
                     <div className="flex gap-4 items-center">
                         <button
                             onClick={toggleTypingMode}
-                            className={`px-3 py-1 rounded transition-all border ${typingMode === 'allLetters' ? 'bg-black text-white border-black' : 'border-gray-200 hover:border-black hover:text-black text-gray-400'}`}
+                            className={`btn-sm ${typingMode === 'allLetters' ? 'btn-primary' : 'border-gray-200 hover:border-black hover:text-black text-gray-400'}`}
                         >
                             {typingMode === 'firstLetter' ? 'Type First Letter' : 'Type All Letters'}
                         </button>
                         <button
                             onClick={toggleMode}
-                            className={`px-3 py-1 rounded transition-all border ${mode === 'test' ? 'bg-black text-white border-black' : 'border-gray-200 hover:border-black hover:text-black text-gray-400'}`}
+                            className={`btn-sm ${mode === 'test' ? 'btn-primary' : 'border-gray-200 hover:border-black hover:text-black text-gray-400'}`}
                         >
                             {mode === 'practice' ? 'Practice Mode' : 'Test Mode'}
                         </button>
@@ -163,7 +163,7 @@ export default function PracticeView({
                     <div className="mt-12 p-12 border-t border-gray-100 text-center">
                         <h2 className="text-2xl font-bold mb-2 tracking-tighter uppercase">Finished</h2>
                         {typingMode === 'firstLetter' && <p className="text-gray-400 text-sm font-bold tracking-widest uppercase mb-8">Final Accuracy: {accuracy}%</p>}
-                        <button onClick={() => setView('practice-menu')} className="px-12 py-3 bg-black text-white rounded-full font-bold uppercase tracking-widest text-xs">Back to Practice Menu</button>
+                        <button onClick={() => setView('practice-menu')} className="btn btn-primary px-12 py-3 rounded-full">Back to Practice Menu</button>
                     </div>
                 )}
             </main>

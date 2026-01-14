@@ -8,6 +8,8 @@ import MainMenu from '../components/MainMenu';
 import { BibleData } from '../types';
 import versesReducer from '../store/versesSlice';
 
+import viewReducer from '../store/viewSlice';
+
 const bibleData: BibleData = {
     "Genesis": {
         "1": { "1": "In the beginning..." }
@@ -17,6 +19,7 @@ const bibleData: BibleData = {
 const createMockStore = () => configureStore({
     reducer: {
         verses: versesReducer,
+        view: viewReducer,
     },
 });
 

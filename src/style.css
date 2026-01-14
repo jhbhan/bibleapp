@@ -4,6 +4,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .btn {
+    @apply px-6 py-4 rounded text-center font-bold uppercase tracking-widest text-xs transition-all;
+  }
+  .btn-primary {
+    @apply bg-black text-white border border-black hover:bg-zinc-800;
+  }
+  .btn-secondary {
+    @apply bg-gray-200 text-black border border-gray-200 hover:bg-gray-300;
+  }
+  .btn-danger {
+    @apply bg-red-600 text-white rounded hover:bg-red-700;
+  }
+  .btn-sm {
+    @apply px-3 py-1 rounded transition-all border;
+  }
+}
+
 body {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;

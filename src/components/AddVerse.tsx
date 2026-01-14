@@ -104,21 +104,21 @@ export default function AddVerse({ bibleData, handleAddVerse, setView }: AddVers
                     disabled={!endChapter}
                 />
                 <button onClick={onAddVerse} disabled={!startVerse}
-                    className="px-6 py-4 bg-black text-white border border-black rounded hover:bg-zinc-800 transition-all text-center font-bold uppercase tracking-widest text-xs disabled:bg-gray-300">
+                    className="btn btn-primary disabled:bg-gray-300">
                     Add Verse
                 </button>
                 <div className="w-full border-b border-gray-300 my-4"></div>
                 <button onClick={() => setView('import-verses')}
-                    className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-secondary">
                     Import Verses
                 </button>
                 <button onClick={() => setView('delete-verses')}
-                    className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-secondary">
                     Delete Verses
                 </button>
                 <div className="w-full border-b border-gray-300 my-4"></div>
                 <button onClick={() => setView('menu')}
-                    className="px-6 py-4 bg-gray-200 text-black border border-gray-200 rounded hover:bg-gray-300 transition-all text-center font-bold uppercase tracking-widest text-xs">
+                    className="btn btn-secondary">
                     Back to Main Menu
                 </button>
             </div>
