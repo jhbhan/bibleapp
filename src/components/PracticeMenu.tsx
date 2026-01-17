@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collections, View } from '../../types';
+import { Collections, View } from '@/types';
 
 interface PracticeMenuProps {
     collections: Collections;

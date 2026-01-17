@@ -1,5 +1,5 @@
+import { SavedVerse, Collections } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SavedVerse, Collections } from '../types';
 
 interface VersesState {
     savedVerses: SavedVerse[];
@@ -63,4 +63,4 @@ export const {
     removeVerseFromCollection,
 } = versesSlice.actions;
 
-export default versesSlice.reducer;
+export const versesReducer = versesSlice.reducer;

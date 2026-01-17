@@ -1,8 +1,7 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
-import EditCollections from '../components/EditCollections';
-import { Collections, SavedVerse, View } from '../types';
+import EditCollections from '@/components/EditCollections.js';
+import { Collections, SavedVerse } from '@/types.js';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 
 describe('EditCollections Component', () => {
     const collections: Collections = { "All Verses": [], "Favorites": ["Genesis 1:1"], "Test Collection": [] };

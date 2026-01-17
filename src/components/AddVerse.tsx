@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import SearchableDropdown from './SearchableDropdown';
-import { BibleData, View } from '../../types';
+import SearchableDropdown from '@components/SearchableDropdown';
+import { BibleData, View } from '@/types';
 
 interface AddVerseProps {
     bibleData: BibleData;

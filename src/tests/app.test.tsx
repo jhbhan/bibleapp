@@ -1,14 +1,12 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { Provider } from 'react-redux';
+import App from '@/app.js';
+import MainMenu from '@/components/MainMenu.js';
+import { versesReducer } from '@/store/versesSlice.js';
+import { viewReducer } from '@/store/viewSlice.js';
+import { BibleData } from '@/types.js';
 import { configureStore } from '@reduxjs/toolkit';
-import App from '../app';
-import MainMenu from '../components/MainMenu';
-import { BibleData } from '../types';
-import versesReducer from '../store/versesSlice';
-
-import viewReducer from '../store/viewSlice';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { Provider } from 'react-redux';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 const bibleData: BibleData = {
     "Genesis": {

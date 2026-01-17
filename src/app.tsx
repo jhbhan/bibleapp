@@ -1,32 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import MainMenu from './components/MainMenu';
-import AddVerse from './components/AddVerse';
-import EditCollections from './components/EditCollections';
-import PracticeMenu from './components/PracticeMenu';
-import PracticeView from './components/PracticeView';
-import DeleteVerses from './components/DeleteVerses';
-import ImportVerses from './components/ImportVerses';
-import { BibleData, SavedVerse } from './types';
-import {
-    addSavedVerse,
-    createCollection,
-    deleteCollection,
-    addVerseToCollection,
-    removeVerseFromCollection,
-    deleteSavedVerse,
-} from './store/versesSlice';
-import {
-    setView,
-    setMode,
-    setTypingMode,
-    setSelectedChapter,
-    setEditingCollection,
-    setSelectedPracticeCollection,
-} from './store/viewSlice';
-import { RootState, AppDispatch } from './store';
-import { usePracticeSession } from './hooks/usePracticeSession';
-import { createVerseRange } from './utils/verse';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import AddVerse from '@components/AddVerse';
+import DeleteVerses from '@components/DeleteVerses';
+import EditCollections from '@components/EditCollections';
+import ImportVerses from '@components/ImportVerses';
+import MainMenu from '@components/MainMenu';
+import PracticeMenu from '@components/PracticeMenu';
+import PracticeView from '@components/PracticeView';
+import { usePracticeSession } from '@hooks/usePracticeSession';
+import { AppDispatch, RootState } from '@store/index';
+import { addSavedVerse, createCollection, deleteCollection, addVerseToCollection, removeVerseFromCollection, deleteSavedVerse } from '@store/versesSlice';
+import { setView, setSelectedChapter, setEditingCollection, setMode, setTypingMode, setSelectedPracticeCollection } from '@store/viewSlice';
+import { BibleData, SavedVerse } from '@/types';
+import { createVerseRange } from '@/utils/verse';
 
 declare global {
     interface Window {
@@ -89,7 +75,7 @@ export default function App() {
             return () => window.removeEventListener('click', focus);
         }
     }, [view, inputRef]);
-    const handleAddVerse = (selectedBook: string, startChapter: string, startVerse: string, endChapter: string, endVerse: string, silent = false) => {
+    const handleAddVerse = (selectedBook: string, startChapter: string, startVerse: string, endChapter: string | null, endVerse: string | null, silent = false) => {
         const verseRange = createVerseRange(selectedBook, startChapter, startVerse, endChapter, endVerse);
         if (!verseRange) return 'invalid';
 

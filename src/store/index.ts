@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import versesReducer from './versesSlice';
-import viewReducer from './viewSlice';
+import { versesReducer } from './versesSlice';
+import { viewReducer } from './viewSlice';
 
 export const store = configureStore({
     reducer: {

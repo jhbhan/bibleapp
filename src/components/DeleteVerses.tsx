@@ -1,5 +1,5 @@
+import { SavedVerse, View } from '@/types';
 import React from 'react';
-import { SavedVerse, View } from '../../types';
 
 interface DeleteVersesProps {
     savedVerses: SavedVerse[];

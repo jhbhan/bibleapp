@@ -1,5 +1,5 @@
+import { Collections, SavedVerse, View } from '@/types';
 import React, { useState } from 'react';
-import { Collections, SavedVerse, View } from '../../types';
 
 interface EditCollectionsProps {
     collections: Collections;

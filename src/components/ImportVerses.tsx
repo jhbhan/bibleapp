@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Papa from 'papaparse';
-import { View, SavedVerse, BibleData } from '../../types';
+import { View, SavedVerse, BibleData } from '@/types';
 
 interface ImportVersesProps {
     handleAddVerse: (selectedBook: string, startChapter: string, startVerse: string, endChapter: string | null, endVerse: string | null, silent: boolean) => 'duplicate' | 'added' | 'invalid';
@@ -31,12 +31,12 @@ export default function ImportVerses({ handleAddVerse, setView, bibleData }: Imp
         setSkippedVerses([]);
         setAddedVerses([]);
 
-        Papa.parse(file, {
+        Papa.parse<{ StartVerse: string; EndVerse?: string }>(file, {
             header: true,
             skipEmptyLines: true,
-            complete: (results) => {
+            complete: (results: Papa.ParseResult<{ StartVerse: string; EndVerse?: string }>) => {
                 const { data, meta } = results;
-                if (!meta.fields.includes('StartVerse') || !meta.fields.includes('EndVerse')) {
+                if (!meta.fields?.includes('StartVerse') || !meta.fields.includes('EndVerse')) {
                     setError('Invalid CSV format. Please make sure the headers are "StartVerse" and "EndVerse".');
                     setImportStatus('error');
                     return;
@@ -44,7 +44,7 @@ export default function ImportVerses({ handleAddVerse, setView, bibleData }: Imp
 
                 const skipped: SkippedVerse[] = [];
                 const added: string[] = [];
-                data.forEach((row: any) => {
+                data.forEach((row: { StartVerse: string; EndVerse?: string }) => {
                     const { StartVerse, EndVerse } = row;
                     const verseRange = EndVerse ? `${StartVerse}-${EndVerse}` : StartVerse;
 
@@ -60,13 +60,18 @@ export default function ImportVerses({ handleAddVerse, setView, bibleData }: Imp
                     }
 
                     const startMatch = StartVerse.match(verseRegex);
+
+                    if (!startMatch)
+                        return;
                     const book = startMatch[1];
                     const chapter = startMatch[3];
                     const verse = startMatch[4];
                     
                     let endBook: string | null = null, endChapter: string | null = null, endVerseNum: string | null = null;
-                    if(EndVerse) {
+                    if (EndVerse) {
                         const endMatch = EndVerse.match(verseRegex);
+                        if (!endMatch)
+                            return;
                         endBook = endMatch[1];
                         endChapter = endMatch[3];
                         endVerseNum = endMatch[4];

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Word, Mode, TypingMode, View, LetterStatus } from '../../types';
+import { Word, Mode, TypingMode, View, LetterStatus } from '@/types';
 
 interface PracticeViewProps {
     accuracy: number;
@@ -15,8 +15,8 @@ interface PracticeViewProps {
     selectedChapter: string | null;
     setView: (view: View) => void;
     history: Word[];
-    cursorRef: React.RefObject<HTMLSpanElement>;
-    inputRef: React.RefObject<HTMLInputElement>;
+    cursorRef: React.RefObject<HTMLSpanElement | null>;
+    inputRef: React.RefObject<HTMLInputElement | null>;
     handleKeyPress: (e: React.KeyboardEvent<HTMLInputElement>) => void;
     letterStatus: LetterStatus;
 }
@@ -85,7 +85,7 @@ export default function PracticeView({
                                     </span>
                                 )}
                                 {typingMode === 'firstLetter' ? (
-                                    <span className={word.status === 'correct' ? 'text-black font-bold' : 'text-red-500 font-bold'}>
+                                    <span className={word.letters.every(letter => letter.status === 'correct') ? 'text-black font-bold' : 'text-red-500 font-bold'}>
                                         {word.original}
                                     </span>
                                 ) : (

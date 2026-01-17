@@ -1,10 +1,11 @@
+import { RootState } from '@/store';
+import { BibleData, TypingMode, Word, SavedVerse } from '@/types';
+import { Mode } from 'fs';
 import { useState, useMemo, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../store';
-import { Word, Mode, TypingMode, SavedVerse } from '../types';
 
 export const usePracticeSession = (
-    bibleData: any, 
+    bibleData: BibleData | null, 
     selectedChapter: string | null, 
     editingCollection: string | null, 
     typingMode: TypingMode, 
@@ -15,8 +16,8 @@ export const usePracticeSession = (
     const [currentWordIndex, setCurrentWordIndex] = useState(0);
     const [attempts, setAttempts] = useState({ correct: 0, total: 0 });
     const [history, setHistory] = useState<Word[]>([]);
-    const inputRef = useRef<HTMLInputElement>(null);
-    const cursorRef = useRef<HTMLSpanElement>(null);
+    const inputRef = useRef<HTMLInputElement | null>(null);
+    const cursorRef = useRef<HTMLSpanElement | null>(null);
     const [letterStatus, setLetterStatus] = useState<'idle' | 'correct' | 'incorrect'>('idle');
 
     const sessionWords: Word[] = useMemo(() => {
@@ -118,7 +119,7 @@ export const usePracticeSession = (
                     targetIndex--;
                 }
                 const newHistory = history.slice(0, targetIndex);
-                const correctCount = newHistory.filter(h => h.status === 'correct').length;
+                const correctCount = newHistory.filter(h => h.letters.every(letter => letter.status === 'correct')).length;
                 setHistory(newHistory);
                 setCurrentWordIndex(targetIndex);
                 setAttempts({ correct: correctCount, total: newHistory.length });

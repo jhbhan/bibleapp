@@ -1,8 +1,7 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { describe, expect, it, vi } from 'vitest';
 import DeleteVerses from '../components/DeleteVerses';
-import { SavedVerse, View } from '../types';
+import { SavedVerse } from '../types';
 
 describe('DeleteVerses Component', () => {
     const savedVerses: SavedVerse[] = [

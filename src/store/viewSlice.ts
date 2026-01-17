@@ -1,6 +1,6 @@
+import { View, TypingMode, Mode } from '@/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { View, Mode, TypingMode } from '../types';
-
+ 
 interface ViewState {
     view: View;
     mode: Mode;
@@ -53,4 +53,4 @@ export const {
     setSelectedPracticeCollection,
 } = viewSlice.actions;
 
-export default viewSlice.reducer;
+export const viewReducer = viewSlice.reducer;
